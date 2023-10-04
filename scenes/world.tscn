@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://kp5f2qqovi7l"]
+
+[ext_resource type="PackedScene" uid="uid://dbccquxi8vu55" path="res://actors/player.tscn" id="1_8npqi"]
+[ext_resource type="Script" path="res://scenes/world.gd" id="1_jco67"]
+[ext_resource type="PackedScene" uid="uid://yttx6x2muh7" path="res://scenes/protoype_level.tscn" id="1_nhriu"]
+[ext_resource type="Script" path="res://scenes/EnemyHandler.gd" id="2_36b4q"]
+[ext_resource type="PackedScene" uid="uid://cboxnaifgnlaq" path="res://actors/enemy.tscn" id="3_eqkca"]
+[ext_resource type="PackedScene" uid="uid://b6w3kovov0il8" path="res://scenes/pause_menu.tscn" id="4_bgq4j"]
+[ext_resource type="PackedScene" uid="uid://d34l538i1vkw7" path="res://scenes/game_over.tscn" id="6_2eems"]
+[ext_resource type="Script" path="res://scenes/TimeDisplay.gd" id="8_svexg"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_jco67")
+
+[node name="EnemyHandler" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("2_36b4q")
+player = NodePath("../Player")
+packed_enemy = ExtResource("3_eqkca")
+
+[node name="Background" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="ProtoypeLevel" parent="Background" instance=ExtResource("1_nhriu")]
+metadata/_edit_lock_ = true
+
+[node name="ProtoypeLevel2" parent="Background" instance=ExtResource("1_nhriu")]
+position = Vector2(2048, 0)
+metadata/_edit_lock_ = true
+
+[node name="ProtoypeLevel3" parent="Background" instance=ExtResource("1_nhriu")]
+position = Vector2(-2048, 0)
+metadata/_edit_lock_ = true
+
+[node name="ProtoypeLevel4" parent="Background" instance=ExtResource("1_nhriu")]
+position = Vector2(0, -2048)
+metadata/_edit_lock_ = true
+
+[node name="ProtoypeLevel5" parent="Background" instance=ExtResource("1_nhriu")]
+position = Vector2(2048, -2048)
+metadata/_edit_lock_ = true
+
+[node name="ProtoypeLevel6" parent="Background" instance=ExtResource("1_nhriu")]
+position = Vector2(-2048, -2048)
+metadata/_edit_lock_ = true
+
+[node name="ProtoypeLevel7" parent="Background" instance=ExtResource("1_nhriu")]
+position = Vector2(0, 2048)
+metadata/_edit_lock_ = true
+
+[node name="ProtoypeLevel8" parent="Background" instance=ExtResource("1_nhriu")]
+position = Vector2(2048, 2048)
+metadata/_edit_lock_ = true
+
+[node name="ProtoypeLevel9" parent="Background" instance=ExtResource("1_nhriu")]
+position = Vector2(-2048, 2048)
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("1_8npqi")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+
+[node name="PauseMenu" parent="Player/Camera2D" instance=ExtResource("4_bgq4j")]
+offset_left = -543.0
+offset_top = -460.0
+offset_right = -543.0
+offset_bottom = -460.0
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="GameOver" parent="HUD" instance=ExtResource("6_2eems")]
+process_mode = 3
+visible = false
+
+[node name="TimeDisplay" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -114.0
+offset_top = 55.0
+offset_right = 114.0
+offset_bottom = 103.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Timecode here"
+horizontal_alignment = 1
+script = ExtResource("8_svexg")
+
+[connection signal="time_update" from="EnemyHandler" to="HUD/TimeDisplay" method="_on_enemy_handler_time_update"]
+[connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="unpaused" from="Player/Camera2D/PauseMenu" to="." method="_on_pause_menu_unpaused"]

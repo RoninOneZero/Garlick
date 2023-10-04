@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5ev2p5pl8siw"]
+
+[ext_resource type="Texture2D" uid="uid://ky673cu5lfa3" path="res://assets/particles/circle_05.png" id="1_ftral"]
+[ext_resource type="Script" path="res://actors/weapons/bullet.gd" id="1_h2kuj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sfvcp"]
+radius = 26.0
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 2
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_h2kuj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("1_ftral")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sfvcp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

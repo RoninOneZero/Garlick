@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbccquxi8vu55"]
+
+[ext_resource type="Texture2D" uid="uid://diemuav4cck7n" path="res://assets/sprites/animals/bear.png" id="1_jksd4"]
+[ext_resource type="Script" path="res://actors/player.gd" id="1_uf0x5"]
+[ext_resource type="Script" path="res://actors/weapons/BallisticRifle.gd" id="3_b42li"]
+[ext_resource type="PackedScene" uid="uid://c5ev2p5pl8siw" path="res://actors/weapons/bullet.tscn" id="4_ln3dn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_odpj4"]
+radius = 61.5224
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jviuy"]
+radius = 1152.1
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+position = Vector2(-2, 0)
+script = ExtResource("1_uf0x5")
+speed = 400.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jksd4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_odpj4")
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="BallisticRifle" type="Node2D" parent="Weapons"]
+script = ExtResource("3_b42li")
+_bullet = ExtResource("4_ln3dn")
+bullet_cooldown = 0.22
+
+[node name="WeaponCooldown" type="Timer" parent="Weapons/BallisticRifle"]
+one_shot = true
+
+[node name="TargetArea" type="Area2D" parent="Weapons/BallisticRifle"]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapons/BallisticRifle/TargetArea"]
+shape = SubResource("CircleShape2D_jviuy")
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="HealthMeter" type="ProgressBar" parent="."]
+modulate = Color(1, 0, 0.0784314, 1)
+offset_left = -90.0
+offset_top = 93.0
+offset_right = 94.0
+offset_bottom = 120.0
+value = 100.0
+rounded = true

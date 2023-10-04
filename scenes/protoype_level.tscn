@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://yttx6x2muh7"]
+
+[ext_resource type="Texture2D" uid="uid://kvt1c8b637vw" path="res://assets/tiles/dark/texture_01.png" id="1_00jfv"]
+
+[node name="ProtoypeLevel" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_00jfv")
+offset = Vector2(512, 512)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("1_00jfv")
+offset = Vector2(-512, 512)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture = ExtResource("1_00jfv")
+offset = Vector2(-512, -512)
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(1024, 0)
+texture = ExtResource("1_00jfv")
+offset = Vector2(-512, -512)
