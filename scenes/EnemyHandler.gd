@@ -18,8 +18,7 @@ func _ready() -> void:
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_F3:
-			var spawn_location := random_point_on_circle(player.global_position, spawn_radius)
-			spawn_enemy(packed_enemy, spawn_location)
+			spawn_enemy_group(packed_enemy, player.global_position, 10)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,6 +33,11 @@ func spawn_enemy(enemy: PackedScene, location: Vector2) ->void:
 	enemy_node.global_position = location
 	get_parent().add_child(enemy_node)
 
+# Spawn a pack of enemies around a location
+func spawn_enemy_group(enemy: PackedScene, origin: Vector2, amount: int) ->void:
+	for n in amount:
+		var spawn_location := random_point_on_circle(origin, spawn_radius)
+		spawn_enemy(enemy, spawn_location)
 
 func random_point_on_circle(origin: Vector2, radius: float) -> Vector2:
 	var circle_radius := Vector2.ONE * radius
