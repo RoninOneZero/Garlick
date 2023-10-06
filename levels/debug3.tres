@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyWave" load_steps=3 format=3 uid="uid://dcr8wc6wn85p2"]
+
+[ext_resource type="PackedScene" uid="uid://cboxnaifgnlaq" path="res://actors/enemy.tscn" id="1_2nmcs"]
+[ext_resource type="Script" path="res://src/EnemyWave.gd" id="2_3ql1h"]
+
+[resource]
+script = ExtResource("2_3ql1h")
+time_code = 1.0
+enemy = ExtResource("1_2nmcs")
+amount = 4
