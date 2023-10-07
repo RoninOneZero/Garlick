@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://kp5f2qqovi7l"]
+[gd_scene load_steps=20 format=3 uid="uid://kp5f2qqovi7l"]
 
 [ext_resource type="PackedScene" uid="uid://dbccquxi8vu55" path="res://actors/player.tscn" id="1_8npqi"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_jco67"]
@@ -6,16 +6,78 @@
 [ext_resource type="Script" path="res://scenes/EnemyHandler.gd" id="2_36b4q"]
 [ext_resource type="PackedScene" uid="uid://cboxnaifgnlaq" path="res://actors/enemy.tscn" id="3_eqkca"]
 [ext_resource type="PackedScene" uid="uid://b6w3kovov0il8" path="res://scenes/pause_menu.tscn" id="4_bgq4j"]
+[ext_resource type="Script" path="res://src/EnemyWave.gd" id="5_1pkxs"]
 [ext_resource type="PackedScene" uid="uid://d34l538i1vkw7" path="res://scenes/game_over.tscn" id="6_2eems"]
 [ext_resource type="Script" path="res://scenes/TimeDisplay.gd" id="8_svexg"]
+
+[sub_resource type="Resource" id="Resource_l75l7"]
+script = ExtResource("5_1pkxs")
+time_code = 1.0
+enemy = ExtResource("3_eqkca")
+amount = 3
+
+[sub_resource type="Resource" id="Resource_n15j8"]
+script = ExtResource("5_1pkxs")
+time_code = 2.0
+enemy = ExtResource("3_eqkca")
+amount = 4
+
+[sub_resource type="Resource" id="Resource_beiv3"]
+script = ExtResource("5_1pkxs")
+time_code = 5.0
+enemy = ExtResource("3_eqkca")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_5abe2"]
+script = ExtResource("5_1pkxs")
+time_code = 10.0
+enemy = ExtResource("3_eqkca")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_0guua"]
+script = ExtResource("5_1pkxs")
+time_code = 15.0
+enemy = ExtResource("3_eqkca")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_q43iq"]
+script = ExtResource("5_1pkxs")
+time_code = 20.0
+enemy = ExtResource("3_eqkca")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_h476i"]
+script = ExtResource("5_1pkxs")
+time_code = 30.0
+enemy = ExtResource("3_eqkca")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_xsq3c"]
+script = ExtResource("5_1pkxs")
+time_code = 40.0
+enemy = ExtResource("3_eqkca")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_tdicv"]
+script = ExtResource("5_1pkxs")
+time_code = 50.0
+enemy = ExtResource("3_eqkca")
+amount = 10
+
+[sub_resource type="Resource" id="Resource_yd0yx"]
+script = ExtResource("5_1pkxs")
+time_code = 60.0
+enemy = ExtResource("3_eqkca")
+amount = 10
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_jco67")
 
-[node name="EnemyHandler" type="Node" parent="." node_paths=PackedStringArray("player")]
+[node name="EnemyHandler" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(0, 1)
 script = ExtResource("2_36b4q")
 player = NodePath("../Player")
-packed_enemy = ExtResource("3_eqkca")
+enemy_waves = [SubResource("Resource_l75l7"), SubResource("Resource_n15j8"), SubResource("Resource_beiv3"), SubResource("Resource_5abe2"), SubResource("Resource_0guua"), SubResource("Resource_q43iq"), SubResource("Resource_h476i"), SubResource("Resource_xsq3c"), SubResource("Resource_tdicv"), SubResource("Resource_yd0yx")]
 
 [node name="Background" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -89,5 +151,6 @@ horizontal_alignment = 1
 script = ExtResource("8_svexg")
 
 [connection signal="time_update" from="EnemyHandler" to="HUD/TimeDisplay" method="_on_enemy_handler_time_update"]
+[connection signal="victory" from="EnemyHandler" to="." method="_on_enemy_handler_victory"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="unpaused" from="Player/Camera2D/PauseMenu" to="." method="_on_pause_menu_unpaused"]
