@@ -6,8 +6,10 @@ extends Node
 @onready var spawn_radius :float = get_viewport().size.x / 2
 
 var elapsed_time := 0.0
+var clock_paused := false
 
 signal time_update
+signal victory
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,8 +26,14 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Send clock information, snapped to milliseconds
-	elapsed_time += delta	
-	emit_signal("time_update", snapped(elapsed_time, 0.1))
+	if not clock_paused:
+		elapsed_time += delta	
+		emit_signal("time_update", snapped(elapsed_time, 0.1))
+
+	if elapsed_time >= 70:
+		clock_paused = true
+		get_tree().call_group("Enemy", "die")
+		emit_signal("victory")
 
 
 func spawn_enemy(enemy: PackedScene, location: Vector2) ->void:
