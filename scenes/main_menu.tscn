@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfaoa7xcwcdr7"]
+[gd_scene load_steps=4 format=3 uid="uid://bfaoa7xcwcdr7"]
 
 [ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_svc5b"]
 [ext_resource type="PackedScene" uid="uid://kp5f2qqovi7l" path="res://scenes/world.tscn" id="2_oscpy"]
+[ext_resource type="AudioStream" uid="uid://chrxatiovkxwc" path="res://assets/music/Cyborg_Superhero_115bpm_141s.wav" id="3_e0yms"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_svc5b")
 game_scene = ExtResource("2_oscpy")
+title_theme = ExtResource("3_e0yms")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -54,6 +56,7 @@ grow_vertical = 2
 text = "START GAME"
 
 [node name="Options" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://kp5f2qqovi7l"]
+[gd_scene load_steps=21 format=3 uid="uid://kp5f2qqovi7l"]
 
 [ext_resource type="PackedScene" uid="uid://dbccquxi8vu55" path="res://actors/player.tscn" id="1_8npqi"]
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_jco67"]
 [ext_resource type="PackedScene" uid="uid://yttx6x2muh7" path="res://scenes/protoype_level.tscn" id="1_nhriu"]
 [ext_resource type="Script" path="res://scenes/EnemyHandler.gd" id="2_36b4q"]
+[ext_resource type="AudioStream" uid="uid://durg4m63bsg5d" path="res://assets/music/Circuit_Breaker_180bpm_60s_B.wav" id="2_nlhsj"]
 [ext_resource type="PackedScene" uid="uid://cboxnaifgnlaq" path="res://actors/enemy.tscn" id="3_eqkca"]
 [ext_resource type="PackedScene" uid="uid://b6w3kovov0il8" path="res://scenes/pause_menu.tscn" id="4_bgq4j"]
 [ext_resource type="Script" path="res://src/EnemyWave.gd" id="5_1pkxs"]
@@ -72,6 +73,7 @@ amount = 10
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_jco67")
+audio_track = ExtResource("2_nlhsj")
 
 [node name="EnemyHandler" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(0, 1)

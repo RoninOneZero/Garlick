@@ -1,10 +1,12 @@
 extends Control
 
 @export var game_scene: PackedScene
+@export var title_theme: AudioStreamWAV
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	AudioHandler.play(title_theme)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,7 +1,13 @@
 extends Node2D
 
+@export var audio_track: AudioStreamWAV
+
 @onready var pause_menu: Control = $Player/Camera2D/PauseMenu
 @onready var game_over: Control = $HUD/GameOver
+
+
+func _ready() -> void:
+	AudioHandler.play(audio_track)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):

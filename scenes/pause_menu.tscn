@@ -45,6 +45,7 @@ text = "RESUME GAME
 "
 
 [node name="Options" type="Button" parent="."]
+visible = false
 layout_mode = 2
 offset_left = 345.0
 offset_top = 417.0
