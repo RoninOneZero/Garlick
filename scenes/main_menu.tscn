@@ -13,7 +13,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_svc5b")
 game_scene = ExtResource("2_oscpy")
-title_theme = ExtResource("3_e0yms")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -103,6 +102,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "WASD to move character."
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_e0yms")
 
 [connection signal="button_down" from="StartGame" to="." method="_on_start_game_button_down"]
 [connection signal="button_down" from="QuitGame" to="." method="_on_quit_game_button_down"]

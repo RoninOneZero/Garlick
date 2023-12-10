@@ -7,7 +7,8 @@ extends Node2D
 
 
 func _ready() -> void:
-	AudioHandler.play(audio_track)
+	#AudioHandler.play(audio_track)
+	pass
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
